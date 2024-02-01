@@ -1,5 +1,6 @@
 plugins {
     id("com.android.library")
+    id("maven-publish")
     id("org.jetbrains.kotlin.android")
 }
 
@@ -31,6 +32,20 @@ android {
 
     kotlinOptions {
         jvmTarget = "17"
+    }
+}
+
+publishing {
+    publications {
+        register<MavenPublication>("release") {
+            groupId = "dev.tunnicliff"
+            artifactId = "replace_me"
+            version = "0.0.4"
+
+            afterEvaluate {
+                from(components["release"])
+            }
+        }
     }
 }
 
